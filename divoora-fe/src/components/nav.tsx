@@ -1,11 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { atom, useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import { queryAtom } from '../App';
+import useGeolocation from '../hooks/geolocation';
 import Logo from '../images/Logo.jpeg';
+
+export const locationAtom = atom({
+  key: 'userLocation',
+  default: {
+    loaded: false,
+    latitude: 0,
+    longitude: 0,
+  },
+});
 
 const Nav: React.FC = () => {
   const [query, setQuery] = useRecoilState(queryAtom);
-
+  const location = useGeolocation();
   const view = useRecoilValue(queryAtom);
   const navigate = useNavigate();
   let name: string = '';
@@ -26,6 +36,10 @@ const Nav: React.FC = () => {
     localStorage.removeItem('user');
     navigate('/');
   };
+
+  // Store users current location
+  const setUserLocation = useSetRecoilState(locationAtom);
+  setUserLocation(location);
 
   return (
     <nav className="relative flex flex-wrap items-center justify-between h-[80px] px-2 bg-white mb-3">
@@ -64,7 +78,7 @@ const Nav: React.FC = () => {
               <button className="px-3 py-2 flex items-center text-base font-normal text-heading hover:opacity-75">
                 <div className="flex justify-end">
                   <div className="w-full">
-                    {(avatarUrl && avatarUrl.length > 0) ? (<img src={avatarUrl} alt="avatar" className="shadow rounded-full w-12 h-12 align-left border-none" />) : null}
+                  {location.loaded && (location.longitude !== 0) ?  `Longitude: ${location.longitude} : Latitude: ${location.latitude}` : 'Requesting location...'}
                   </div>
                 </div>
                 <div className="dropdown">

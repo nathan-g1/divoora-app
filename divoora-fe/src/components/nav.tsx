@@ -45,7 +45,6 @@ const Nav: React.FC = () => {
               e.preventDefault();
               // get input value
               const inputValue: string = query;
-              console.log(inputValue);
             }}
           >
             <input

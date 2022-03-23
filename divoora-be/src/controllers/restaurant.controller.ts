@@ -112,7 +112,6 @@ export class RestaurantController {
         },
       },
     });
-    console.log(restaurants)
     return restaurants;
   }
 

@@ -51,7 +51,6 @@ interface Dish {
 
 const DetailsPage: React.FC = (props) => {
   const location = useLocation();
-  console.log(location.state);
   // @ts-ignore
   const { restaurantData } = location.state;
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -64,7 +63,6 @@ const DetailsPage: React.FC = (props) => {
     };
 
     // Get dishes of the selected restaurant
-    console.log(dishes);
     getDishes(restaurantData?.id);
   }, [setDishes]);
 

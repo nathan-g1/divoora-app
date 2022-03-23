@@ -1,4 +1,3 @@
-import LandingPage from './views/landingPage';
 import SearchPage from './views/searchPage';
 import { Routes, Route } from 'react-router-dom';
 import ResultPage from './views/resultPage';
@@ -14,7 +13,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage  />} />
+        <Route path="/" element={<ResultPage  />} />
         <Route path="/search" element={<SearchPage/>} />
         <Route path="/result" element={<ResultPage/>} />
         <Route path="/detail" element={<DetailsPage />} />
